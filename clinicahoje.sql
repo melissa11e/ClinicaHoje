@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27-Maio-2024 às 22:08
+-- Tempo de geração: 09-Jun-2024 às 08:44
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -38,8 +38,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`codigoAdmin`, `emailAdmin`, `senhaAdmin`) VALUES
-(1, 'adm@gmail.com', '12345678'),
-(2, 'adm@gmail.com', '12345678');
+(1, 'adm@gmail.com', '12345678');
 
 -- --------------------------------------------------------
 
@@ -56,13 +55,19 @@ CREATE TABLE `clog` (
   `senha` char(16) DEFAULT NULL CHECK (octet_length(`senha`) >= 8)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Extraindo dados da tabela `clog`
+-- Estrutura da tabela `consulta`
 --
 
-INSERT INTO `clog` (`codigo`, `nome`, `cpf`, `email`, `telefone`, `senha`) VALUES
-(2, 'melissa', '11122233344', 'melissa@gmail.com', '11229900', 'teste123'),
-(7, 'melissa', '12345678910', 'mel@gmail', '12345678', 'abcdefgh');
+CREATE TABLE `consulta` (
+  `cdConsulta` int(11) NOT NULL,
+  `especialidade` varchar(50) DEFAULT NULL,
+  `dtConsulta` date DEFAULT NULL,
+  `horario` char(5) DEFAULT NULL,
+  `nome` varchar(70) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tabelas despejadas
@@ -72,7 +77,8 @@ INSERT INTO `clog` (`codigo`, `nome`, `cpf`, `email`, `telefone`, `senha`) VALUE
 -- Índices para tabela `admin`
 --
 ALTER TABLE `admin`
-  ADD PRIMARY KEY (`codigoAdmin`);
+  ADD PRIMARY KEY (`codigoAdmin`),
+  ADD UNIQUE KEY `email` (`emailAdmin`);
 
 --
 -- Índices para tabela `clog`
@@ -84,6 +90,13 @@ ALTER TABLE `clog`
   ADD UNIQUE KEY `unique_telefone` (`telefone`);
 
 --
+-- Índices para tabela `consulta`
+--
+ALTER TABLE `consulta`
+  ADD PRIMARY KEY (`cdConsulta`),
+  ADD KEY `nome` (`nome`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -91,13 +104,19 @@ ALTER TABLE `clog`
 -- AUTO_INCREMENT de tabela `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `codigoAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codigoAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `clog`
 --
 ALTER TABLE `clog`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de tabela `consulta`
+--
+ALTER TABLE `consulta`
+  MODIFY `cdConsulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
